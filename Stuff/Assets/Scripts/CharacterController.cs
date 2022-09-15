@@ -1,38 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private Rigidbody CharacterBody;
+    [SerializeField] int f_speed = (int)4f;
 
-    private bool isToutchingFloor;
-    private int f_speed;
+    public bool shoot;
+    public Vector3 point;
     void Update()
     {
         //are you toutchining the floor
         //if (isToutchingFloor);
         {
-          //isToutchingFloor = true;
+            //isToutchingFloor = true;
+
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.D))
         {
-            isToutchingFloor = true;
-            Debug.LogError("Nu trykerman på knappen");
-            CharacterBody.AddForce(Vector3.up * 5000f);
-            CharacterBody.AddForce(Vector3.fwd * 5000f);
-            CharacterBody.AddForce(Vector3.right * 5000f);
-
+            transform.Rotate(Vector3.up, 20 * Time.deltaTime);
         }
+        if (Input.GetKey(KeyCode.A))
+        { 
+                transform.Rotate(-Vector3.up, 20 * Time.deltaTime);
+        }
+
+
+
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            Vector3 direction = Vector3.fwd * Input.GetAxis("Vertical");
+
+            transform.Translate(direction * f_speed * Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //Shoot ();
+
+            CharacterBody.AddForce(Vector3.fwd * -800f);
+            CharacterBody.AddExplosionForce(800f, Vector3.up, 00f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            f_speed = (int)10f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            f_speed = (int)4f;
+        }
+
     }
-    //you are toutching the floor
-    private void OnCollisionEnter(Collision collision)
+
+    private void Shoot()
     {
-        Debug.LogError("Its Working!!");
-         isToutchingFloor = true;
+        Debug.LogAssertion("Yeet");
     }
-    
 
 }
