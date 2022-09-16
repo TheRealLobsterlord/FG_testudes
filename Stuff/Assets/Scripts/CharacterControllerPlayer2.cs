@@ -3,11 +3,12 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class CharacterControllerPlayer2 : MonoBehaviour
 {
     [SerializeField] private Rigidbody CharacterBody;
     [SerializeField] int f_speed = (int)4;
     [SerializeField] int f_Rspeed = (int)4;
+
     public bool shoot;
     public Vector3 point;
     void Update()
@@ -19,16 +20,16 @@ public class CharacterController : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Rotate(Vector3.up, 30 * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Rotate(-Vector3.up, 30 * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.M))
         {
             Vector3 newRotation = new Vector3(0, 0, 0);
             transform.eulerAngles = newRotation;
@@ -36,21 +37,21 @@ public class CharacterController : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             Vector3 direction = Vector3.fwd * Input.GetAxis("Vertical");
 
             transform.Translate(direction * f_speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
-            Vector3 direction = Vector3.fwd * Input.GetAxis("Vertical");
+            Vector3 direction = Vector3.back * Input.GetAxis("Vertical");
 
-            transform.Translate(direction * f_Rspeed * Time.deltaTime);
+            transform.Translate(direction * -f_Rspeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             //Shoot ();
 
@@ -58,12 +59,12 @@ public class CharacterController : MonoBehaviour
             CharacterBody.AddExplosionForce(800f, Vector3.up, 00f);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.RightShift))
         {
             f_speed = (int)10;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.RightShift))
         {
             f_speed = (int)4;
         }
