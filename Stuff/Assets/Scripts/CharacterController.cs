@@ -5,52 +5,58 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public TurnManager turnManager;
     [SerializeField] private Rigidbody CharacterBody;
     [SerializeField] int f_speed = (int)4;
     [SerializeField] int f_Rspeed = (int)4;
+    [SerializeField] bool IsMyTurn;
     public Vector3 point;
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.D))
+        if(IsMyTurn)
         {
-            transform.Rotate(Vector3.up, 30 * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(-Vector3.up, 30 * Time.deltaTime);
-        }
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Rotate(Vector3.up, 30 * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Rotate(-Vector3.up, 30 * Time.deltaTime);
+            }
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            Vector3 newRotation = new Vector3(0, 0, 0);
-            transform.eulerAngles = newRotation;
-        }
+            if (Input.GetKey(KeyCode.E))
+            {
+                Vector3 newRotation = new Vector3(0, 0, 0);
+                transform.eulerAngles = newRotation;
+            }
 
 
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            Vector3 direction = Vector3.forward * Input.GetAxis("Vertical");
+            if (Input.GetKey(KeyCode.W))
+            {
+                Vector3 direction = Vector3.forward * Input.GetAxis("Vertical");
 
-            transform.Translate(direction * f_speed * Time.deltaTime);
-        }
+                transform.Translate(direction * f_speed * Time.deltaTime);
+            }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            Vector3 direction = Vector3.forward * Input.GetAxis("Vertical");
+            if (Input.GetKey(KeyCode.S))
+            {
+                Vector3 direction = Vector3.forward * Input.GetAxis("Vertical");
 
-            transform.Translate(direction * f_Rspeed * Time.deltaTime);
-        }
+                transform.Translate(direction * f_Rspeed * Time.deltaTime);
+            }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            f_speed = (int)10;
-        }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                f_speed = (int)10;
+            }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            f_speed = (int)4;
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                f_speed = (int)4;
+            }
+
         }
 
     }
