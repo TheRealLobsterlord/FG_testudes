@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    public TurnManager turnManager;
+    [SerializeField] private PlayerTurn playerTurn;
     [SerializeField] private Rigidbody CharacterBody;
+    [SerializeField] private Camera playerCam;
     [SerializeField] int f_speed = (int)4;
     [SerializeField] int f_Rspeed = (int)4;
-    [SerializeField] bool IsMyTurn;
     public Vector3 point;
     void Update()
     {
 
-        if(IsMyTurn)
+
+        if (playerTurn.IsPlayerTurn())
         {
+            playerCam.enabled = false;
+
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Rotate(Vector3.up, 30 * Time.deltaTime);
@@ -56,7 +59,10 @@ public class CharacterController : MonoBehaviour
             {
                 f_speed = (int)4;
             }
-
+            else
+            {
+                playerCam.enabled = true;
+            }
         }
 
     }

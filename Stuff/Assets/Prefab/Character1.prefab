@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 322258055597119437}
   - component: {fileID: 322258055597119436}
   - component: {fileID: 322258055597119439}
-  - component: {fileID: 322258055597119433}
+  - component: {fileID: 2082995860682094443}
   m_Layer: 6
   m_Name: Character1
   m_TagString: Untagged
@@ -92,10 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e3cca025b3a6d44a98a70fb6c1b95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTurn: {fileID: 2082995860682094443}
   CharacterBody: {fileID: 322258055597119435}
   f_speed: 4
   f_Rspeed: 4
-  IsMyTurn: 0
   point: {x: 0, y: 0, z: 0}
 --- !u!114 &322258055597119436
 MonoBehaviour:
@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   range: 100
+  playerTurn: {fileID: 0}
   characterBody: {fileID: 322258055597119435}
   muzzleFlash: {fileID: 322258056242135934}
   BarrelEnd: {fileID: 322258056866845755}
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
---- !u!114 &322258055597119433
+--- !u!114 &2082995860682094443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,10 +137,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 322258055597119438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ba81ea3100161478b421a8e02af97b, type: 3}
+  m_Script: {fileID: 11500000, guid: f44446f4d3393c644a116d33a6df7329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit1: 
 --- !u!1 &322258055668820164
 GameObject:
   m_ObjectHideFlags: 0

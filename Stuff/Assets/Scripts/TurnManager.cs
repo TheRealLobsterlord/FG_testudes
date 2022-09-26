@@ -2,48 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Battle { Start, Player1Turn, Player2Turn, Won, Lost }
-
 public class TurnManager : MonoBehaviour
 {
-    public CharacterController script;
-    public GameObject Player1;
-    public GameObject Player2;
+    private static TurnManager instance;
+    [SerializeField] private PlayerTurn playerOne;
+    [SerializeField] private PlayerTurn playerTwo;
+    [SerializeField] private float timeBetweenTurns;
 
-    public Transform P1Location;
-    public Transform P2Location;
+    private int currentPlayerIndex;
+    private bool waitingForNextTurn;
+    private float turnDelay;
 
-    Unit player1Unit;
-    Unit player2Unit;
-
-    public Battle state;
-    public void Start()
+    private void Awake()
     {
-        state = Battle.Start;
-        StartCoroutine(SetupBattle());
+        if (instance == null)
+        {
+            instance = this;
+            currentPlayerIndex = 1;
+            playerOne.SetPlayerTurn(1);
+            playerTwo.SetPlayerTurn(2);
+        }
     }
 
-    IEnumerator SetupBattle()
+    private void Update()
     {
-       GameObject P1Go = Instantiate(Player1, P1Location);
-        player1Unit = P1Go.GetComponent<Unit>();
-
-       GameObject P2Go = Instantiate(Player2, P2Location);
-        player2Unit = P2Go.GetComponent<Unit>();
-
-        yield return new WaitForSeconds(3f);
-
-        state = Battle.Player1Turn;
-        Player1Turn();
+        if (waitingForNextTurn)
+        {
+            turnDelay += Time.deltaTime;
+            if (turnDelay >= timeBetweenTurns)
+            {
+                waitingForNextTurn = false;
+                ChangeTurn();
+                turnDelay = 0;
+            }
+        }
     }
 
-    public void Player1Turn()
+    public bool IsItPlayerTurn(int index)
     {
-        if (state != Battle.Player1Turn)
-            return;
-        bool IsMyTurn = true;
+        /*if (waitingForNextTurn)
+        {
+            Debug.LogError("False");
+            return false;
+        }*/
+
+        return index == currentPlayerIndex;
     }
 
+    public static TurnManager GetInstance()
+    {
+        return instance;
+    }
+
+    public void TriggerChangeTurn()
+    {
+        Debug.LogError("True");
+        waitingForNextTurn = true;
+    }
+
+    public void ChangeTurn()
+    {
+        if (currentPlayerIndex == 1)
+        {
+            currentPlayerIndex = 2;
+        }
+        else if (currentPlayerIndex == 2)
+        {
+            currentPlayerIndex = 1;
+        }
+    }
 }
-
-
