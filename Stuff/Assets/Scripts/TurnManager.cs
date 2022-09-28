@@ -27,24 +27,19 @@ public class TurnManager : MonoBehaviour
     private void Update()
     {
         if (waitingForNextTurn)
-        {
-            turnDelay += Time.deltaTime;
-            if (turnDelay >= timeBetweenTurns)
-            {
-                waitingForNextTurn = false;
-                ChangeTurn();
-                turnDelay = 0;
-            }
+        {          
+            waitingForNextTurn = false;
+            ChangeTurn();
         }
     }
 
     public bool IsItPlayerTurn(int index)
     {
-        /*if (waitingForNextTurn)
+        if (waitingForNextTurn)
         {
             Debug.LogError("False");
             return false;
-        }*/
+        }
 
         return index == currentPlayerIndex;
     }

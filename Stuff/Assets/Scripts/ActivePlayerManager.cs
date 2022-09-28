@@ -27,14 +27,32 @@ public class ActivePlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentDelay <= 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-           
+            if (currentDelay <= 0)
+            {
+                currentTurnTime = 0;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (currentDelay <= 0)
+            {
+                currentTurnTime = 0;
+            }
+        }
+
+
+
+        if (currentDelay <= 0)
+        {          
             currentTurnTime += Time.deltaTime;
             
             if (currentTurnTime >= maxTimePerTurn)
             {
-                ChangeTurn();
+                TurnManager.GetInstance().TriggerChangeTurn();
+                currentTurnTime = 0;
             }
             UpdateTimeVisuals();
         }
@@ -66,7 +84,7 @@ public class ActivePlayerManager : MonoBehaviour
         {
             currentPlayer = player1;
         }
-
+        currentTurnTime = 0;
         ResetTimers();
         UpdateTimeVisuals();
     }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private PlayerTurn playerTurn;
+    [SerializeField] public TurnManager ChangeTurn;
     [SerializeField] private Rigidbody CharacterBody;
     [SerializeField] private Camera playerCam;
     [SerializeField] int f_speed = (int)4;
@@ -32,6 +33,7 @@ public class CharacterController : MonoBehaviour
             {
                 Vector3 newRotation = new Vector3(0, 0, 0);
                 transform.eulerAngles = newRotation;
+                TurnManager.GetInstance().TriggerChangeTurn();
             }
 
 

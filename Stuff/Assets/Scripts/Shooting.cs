@@ -11,8 +11,10 @@ public class Shooting : MonoBehaviour
     [SerializeField] private PlayerTurn playerTurn;
     [SerializeField] private Rigidbody characterBody;
 
+    public GameObject hitmark;
     public ParticleSystem muzzleFlash;
     public GameObject BarrelEnd;
+    private float Wait;
 
     void Update()
     {
@@ -22,7 +24,7 @@ public class Shooting : MonoBehaviour
             {
                     Shoot();
                     characterBody.AddExplosionForce(800f, Vector3.back, 80f);
-                    characterBody.AddExplosionForce(800f, Vector3.up, 80f);
+                    characterBody.AddExplosionForce(800f, Vector3.up, 80f); 
                     TurnManager.GetInstance().TriggerChangeTurn();
             }
        }
@@ -43,7 +45,9 @@ public class Shooting : MonoBehaviour
             {
                 target.TakeDamage(damage);                
             }
-        }
 
+            GameObject Impactgo = Instantiate(hitmark, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(Impactgo, 2f);
+        }
     }
 }
