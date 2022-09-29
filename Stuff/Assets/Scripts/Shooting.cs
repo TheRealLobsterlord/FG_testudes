@@ -23,8 +23,8 @@ public class Shooting : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                     Shoot();
-                    characterBody.AddExplosionForce(800f, Vector3.back, 80f);
-                    characterBody.AddExplosionForce(800f, Vector3.up, 80f); 
+                    characterBody.AddExplosionForce(800f, Vector3.back, 800f);
+                    characterBody.AddExplosionForce(800f, Vector3.up, 800f); 
                     TurnManager.GetInstance().TriggerChangeTurn();
             }
        }
